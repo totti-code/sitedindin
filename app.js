@@ -4,7 +4,7 @@ const STORAGE_KEY = "docedindingourmet_cart_v1";
 
 // ✅ Troque para o seu WhatsApp: ex BR = 55, Fortaleza DDD 85, número 9xxxx...
 // Exemplo: "5585999999999"
-const WHATSAPP_PHONE = "55SEUDDDSEUNUMERO";
+const WHATSAPP_PHONE = "5585989326734";
 
 // Catálogo (edite preços e sabores)
 const products = [
