@@ -2,22 +2,24 @@ const $ = (id) => document.getElementById(id);
 
 const STORAGE_KEY = "docedindingourmet_cart_v1";
 
-// ✅ Troque para o seu WhatsApp: ex BR = 55, Fortaleza DDD 85, número 9xxxx...
-// Exemplo: "5585999999999"
+// ✅ Seu WhatsApp
 const WHATSAPP_PHONE = "5585989326734";
 
-// Catálogo (edite preços e sabores)
+// Catálogo (edite preços, sabores e imagens)
 const products = [
-  { id:"p1", name:"Morango com Leite Ninho", price: 6.50, cat:"Premium", desc:"Cremoso e docinho na medida." },
-  { id:"p2", name:"Oreo", price: 7.00, cat:"Premium", desc:"Chocolate + pedacinhos de Oreo." },
-  { id:"p3", name:"Brigadeiro", price: 6.00, cat:"Clássicos", desc:"Sabor chocolate tradicional." },
-  { id:"p4", name:"Coco", price: 5.50, cat:"Clássicos", desc:"Levinho e bem geladinho." },
-  { id:"p5", name:"Maracujá", price: 6.00, cat:"Frutas", desc:"Azulzinho? não — aqui é azedinho e cremoso 😄" },
-  { id:"p6", name:"Limão", price: 5.50, cat:"Frutas", desc:"Refrescante e perfeito pro calor." },
-  { id:"p7", name:"Chocolate Trufado", price: 7.50, cat:"Premium", desc:"Mais intenso, mais cremoso." },
-  { id:"p8", name:"Paçoca", price: 6.50, cat:"Clássicos", desc:"Sabor Brasil! Bem amendoim." },
-  { id:"p9", name:"Uva", price: 5.50, cat:"Frutas", desc:"Docinho e refrescante." }
+  { id:"p1", name:"Morango com Leite Ninho", price: 6.50, cat:"Premium",  desc:"Cremoso e docinho na medida.",            img:"assets/dindin-morango-ninho.jpg" },
+  { id:"p2", name:"Oreo",                   price: 7.00, cat:"Premium",  desc:"Chocolate + pedacinhos de Oreo.",          img:"assets/dindin-oreo.jpg" },
+  { id:"p3", name:"Brigadeiro",             price: 6.00, cat:"Clássicos",desc:"Sabor chocolate tradicional.",              img:"assets/dindin-brigadeiro.jpg" },
+  { id:"p4", name:"Coco",                   price: 5.50, cat:"Clássicos",desc:"Levinho e bem geladinho.",                 img:"assets/dindin-coco.jpg" },
+  { id:"p5", name:"Maracujá",               price: 6.00, cat:"Frutas",   desc:"Azedinho e cremoso 😄",                    img:"assets/dindin-maracuja.jpg" },
+  { id:"p6", name:"Limão",                  price: 5.50, cat:"Frutas",   desc:"Refrescante e perfeito pro calor.",       img:"assets/dindin-limao.jpg" },
+  { id:"p7", name:"Chocolate Trufado",      price: 7.50, cat:"Premium",  desc:"Mais intenso, mais cremoso.",             img:"assets/dindin-chocolate-trufado.jpg" },
+  { id:"p8", name:"Paçoca",                 price: 6.50, cat:"Clássicos",desc:"Sabor Brasil! Bem amendoim.",              img:"assets/dindin-pacoca.jpg" },
+  { id:"p9", name:"Uva",                    price: 5.50, cat:"Frutas",   desc:"Docinho e refrescante.",                   img:"assets/dindin-uva.jpg" }
 ];
+
+// Se você não tiver placeholder, pode remover e deixar string vazia
+const FALLBACK_IMG = "assets/placeholder.jpg";
 
 // ===== Cart =====
 function loadCart(){
@@ -73,7 +75,18 @@ function renderProducts(){
   for(const p of filtered){
     const el = document.createElement("article");
     el.className = "card";
+
+    const imgSrc = p.img || FALLBACK_IMG;
+
     el.innerHTML = `
+      <div class="prodImg">
+        <img
+          src="${escapeHtml(imgSrc)}"
+          alt="${escapeHtml(p.name)}"
+          onerror="this.onerror=null; this.src='${escapeHtml(FALLBACK_IMG)}';"
+        />
+      </div>
+
       <div class="cardTop">
         <div>
           <h4>${escapeHtml(p.name)}</h4>
@@ -204,12 +217,8 @@ function changeQty(id, delta){
   renderCart();
 }
 
-function addOne(id){
-  changeQty(id, +1);
-}
-function removeOne(id){
-  changeQty(id, -1);
-}
+function addOne(id){ changeQty(id, +1); }
+function removeOne(id){ changeQty(id, -1); }
 
 // Clicks no catálogo
 grid.addEventListener("click", (e) => {
@@ -222,7 +231,6 @@ grid.addEventListener("click", (e) => {
   if(act === "add" || act === "plus") addOne(id);
   if(act === "minus") removeOne(id);
 
-  // feedback visual rápido
   cartCountEl.textContent = String(cartCount(loadCart()));
 });
 
@@ -261,7 +269,6 @@ q.addEventListener("input", renderProducts);
 
 // Botões extras
 $("btnAddPopular").addEventListener("click", () => {
-  // Kit Popular: 1 Morango Ninho + 1 Brigadeiro + 1 Maracujá
   addOne("p1"); addOne("p3"); addOne("p5");
   openCart();
 });
