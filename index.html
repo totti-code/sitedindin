@@ -1,1 +1,228 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>docedindingourmet | Dindin Gourmet</title>
+  <meta name="description" content="docedindingourmet — Dindin gourmet cremoso, sabores especiais e pedido via WhatsApp." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
+  <header class="top">
+    <div class="container topInner">
+      <a class="brand" href="#inicio" aria-label="Ir para início">
+        <div class="logo" aria-hidden="true">🍧</div>
+        <div class="brandTxt">
+          <h1>docedindingourmet</h1>
+          <p>Dindin gourmet • Cremoso • Feito com carinho</p>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a href="#sabores">Sabores</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <button class="cartBtn" id="btnOpenCart" type="button" aria-label="Abrir carrinho">
+        <span class="cartIcon">🛒</span>
+        <span class="cartCount" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="inicio" class="container">
+    <section class="hero">
+      <div class="heroCard">
+        <span class="pill">Novidade</span>
+        <h2>Dindin gourmet que derrete na boca 💗</h2>
+        <p>
+          Escolha seus sabores, monte o carrinho e finalize o pedido no WhatsApp
+          com tudo certinho (quantidades + total).
+        </p>
+
+        <div class="heroActions">
+          <a class="btn primary" href="#sabores">Ver sabores</a>
+          <button class="btn ghost" id="btnAddPopular" type="button">Adicionar “Kit Popular”</button>
+        </div>
+
+        <div class="heroNotes">
+          <div class="note">
+            <strong>Entrega</strong>
+            <span>Combine pelo WhatsApp</span>
+          </div>
+          <div class="note">
+            <strong>Pagamento</strong>
+            <span>Pix / dinheiro</span>
+          </div>
+          <div class="note">
+            <strong>Personalizado</strong>
+            <span>Sabores sob pedido</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="heroArt" aria-hidden="true">
+        <div class="blob b1"></div>
+        <div class="blob b2"></div>
+        <div class="floatCard">
+          <div class="floatTitle">Mais pedidos</div>
+          <div class="floatItem">Morango com Leite Ninho</div>
+          <div class="floatItem">Oreo</div>
+          <div class="floatItem">Maracujá</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sabores" class="section">
+      <div class="sectionHead">
+        <h3>Sabores</h3>
+        <p>Selecione os dindins para adicionar ao carrinho.</p>
+      </div>
+
+      <div class="toolbar">
+        <div class="search">
+          <input id="q" type="search" placeholder="Buscar sabor (ex: morango, ninho...)" />
+        </div>
+
+        <div class="chips" id="chips">
+          <button class="chip active" data-cat="Todos" type="button">Todos</button>
+          <button class="chip" data-cat="Clássicos" type="button">Clássicos</button>
+          <button class="chip" data-cat="Premium" type="button">Premium</button>
+          <button class="chip" data-cat="Frutas" type="button">Frutas</button>
+        </div>
+      </div>
+
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section id="como-funciona" class="section">
+      <div class="sectionHead">
+        <h3>Como funciona</h3>
+        <p>Em 3 passos você fecha seu pedido rapidinho.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="stepNum">1</div>
+          <div>
+            <h4>Escolha os sabores</h4>
+            <p>Adicione ao carrinho e ajuste as quantidades.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="stepNum">2</div>
+          <div>
+            <h4>Confira o total</h4>
+            <p>O carrinho calcula automaticamente pra você.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="stepNum">3</div>
+          <div>
+            <h4>Finalize no WhatsApp</h4>
+            <p>Um texto pronto é gerado com itens + endereço + observações.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="section">
+      <div class="sectionHead">
+        <h3>Contato</h3>
+        <p>Quer um sabor especial? Chama no WhatsApp.</p>
+      </div>
+
+      <div class="contactCard">
+        <div class="contactLeft">
+          <h4>docedindingourmet</h4>
+          <p class="muted">Dindin gourmet • Fortaleza/CE (ajuste aqui se quiser)</p>
+          <ul class="bullets">
+            <li>✅ Pedidos via WhatsApp</li>
+            <li>✅ Produção sob demanda</li>
+            <li>✅ Opções clássicas e premium</li>
+          </ul>
+        </div>
+        <div class="contactRight">
+          <a class="btn primary big" id="btnWhatsTop" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+          <span class="muted small">O link abre com uma mensagem padrão.</span>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> docedindingourmet</span>
+      <span class="muted">Feito em HTML • CSS • JS</span>
+    </footer>
+  </main>
+
+  <!-- Drawer Carrinho -->
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawerOverlay" id="drawerOverlay"></div>
+
+    <div class="drawerPanel" role="dialog" aria-modal="true" aria-label="Carrinho">
+      <div class="drawerHead">
+        <div>
+          <h3>Carrinho</h3>
+          <p class="muted small" id="cartSubtitle">0 itens</p>
+        </div>
+        <button class="iconBtn" id="btnCloseCart" type="button" aria-label="Fechar carrinho">✕</button>
+      </div>
+
+      <div class="drawerBody">
+        <div id="cartEmpty" class="empty">
+          <div class="emptyIcon">🩷</div>
+          <h4>Seu carrinho está vazio</h4>
+          <p class="muted">Adicione seus dindins favoritos para pedir no WhatsApp.</p>
+        </div>
+
+        <div id="cartList" class="cartList"></div>
+      </div>
+
+      <div class="drawerFoot">
+        <div class="totals">
+          <div class="line">
+            <span class="muted">Subtotal</span>
+            <strong id="subtotal">R$ 0,00</strong>
+          </div>
+          <div class="line">
+            <span class="muted">Taxa de entrega</span>
+            <span class="muted" id="deliveryLabel">A combinar</span>
+          </div>
+          <div class="line total">
+            <span>Total</span>
+            <strong id="total">R$ 0,00</strong>
+          </div>
+        </div>
+
+        <div class="checkout">
+          <div class="field">
+            <label for="customerName">Seu nome</label>
+            <input id="customerName" type="text" placeholder="Ex: Totti" />
+          </div>
+
+          <div class="field">
+            <label for="address">Endereço (opcional)</label>
+            <input id="address" type="text" placeholder="Rua, nº, bairro, referência..." />
+          </div>
+
+          <div class="field">
+            <label for="notes">Observações (opcional)</label>
+            <textarea id="notes" rows="3" placeholder="Ex: sem lactose, entregar às 18h..."></textarea>
+          </div>
+
+          <button class="btn primary big" id="btnWhats" type="button">Pedir no WhatsApp</button>
+          <button class="btn danger ghost" id="btnClear" type="button">Limpar carrinho</button>
+
+          <p class="muted tiny">
+            Ao clicar em “Pedir no WhatsApp”, será gerada uma mensagem com os itens do carrinho.
+          </p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <script src="app.js"></script>
+</body>
+</html>
